@@ -47,16 +47,16 @@ namespace WebApplication6.Page
 
 
             HighCharts1.Type = ChartType.Line;
-
+            HighCharts1.Title = "いやっほい！";
             HighCharts1.DataKey = "a";
 
             HighCharts1.DataValue = "b";
 
             HighCharts1.YAxis = "降雨量(mm)";//Y轴的值;
 
-            HighCharts1.Tooltip = "valueSuffix: 'mm'";
-
-            HighCharts1.DataName = "武汉";
+            //HighCharts1.Tooltip = "valueSuffix: 'mm'";
+            
+            HighCharts1.DataName = "検温";
 
             HighCharts1.DataSource = dt;
 
