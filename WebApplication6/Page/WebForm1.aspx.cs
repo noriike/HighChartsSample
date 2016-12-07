@@ -39,6 +39,7 @@ namespace WebApplication6.Page
             HighCharts1.DataSource = dt;
             HighCharts1.DataBind();
 
+
         }
     }
 }
