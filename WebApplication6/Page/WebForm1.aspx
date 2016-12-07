@@ -28,6 +28,9 @@
             var canvas = document.getElementById("canvas1");
             var ctx = canvas.getContext("2d");
 
+            ctx.canvas.width = window.innerWidth;
+            ctx.canvas.height = window.innerHeight;
+
             ctx.font = "12px 'ＭＳ Ｐゴシック'";
             
             var plotLeft = Highcharts.charts[0].plotLeft;
@@ -45,6 +48,18 @@
         $(document).ready(function () {
             initializeMap();
         })
+
+        var timer = false;
+        $(window).resize(function () {
+            if (timer !== false) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(function () {
+                // リサイズが終了した時点で行う処理または関数を記述
+                initializeMap();
+            }, 200);
+        });
+
     </script>
 </body>
 </html>
