@@ -46,7 +46,8 @@ namespace WebApplication6.Page
         /// <summary>
         /// Y轴选项 默认可以只填名称
         /// </summary>
-        public string YAxis { get; set; }
+        //public string YAxis { get; set; }
+        public List<object> YAxis { get; set; }
 
         /// <summary>
         /// 提示格式
@@ -283,20 +284,27 @@ namespace WebApplication6.Page
                 XAxisToString(jscode, SeriesList[0].SeriesData.Keys.ToList());
             }
 
-            if (!string.IsNullOrEmpty(YAxis))
-            {
-                if (YAxis.IndexOf("title") < 0)
-                {
-                    jscode.Append("yAxis: { title:{ text:'" + YAxis + "'}},");
+            //if (!string.IsNullOrEmpty(YAxis))
+            //{
+            //    if (YAxis.IndexOf("title") < 0)
+            //    {
+            //        jscode.Append("yAxis: { title:{ text:'" + YAxis + "'}},");
 
-                    if (string.IsNullOrEmpty(Tooltip))
-                        jscode.Append("tooltip: { valueSuffix:'" + YAxis + "' },");
-                }
-                else
-                {
-                    jscode.Append("yAxis: {" + YAxis + "},");
-                }
+            //        if (string.IsNullOrEmpty(Tooltip))
+            //            jscode.Append("tooltip: { valueSuffix:'" + YAxis + "' },");
+            //    }
+            //    else
+            //    {
+            //        jscode.Append("yAxis: {" + YAxis + "},");
+            //    }
+            //}
+
+            //追加
+            if (YAxis != null)
+            {
+                YAxisToString(jscode, YAxis);
             }
+
 
             jscode.Append("legend: { enabled: " + Legend.ToString().ToLower() + " },");
 
@@ -356,7 +364,7 @@ namespace WebApplication6.Page
         /// <returns></returns>
         private string SeriesDataToString(ChartsSeries series)
         {
-            string seriesdata = "{ name: '" + series.SeriesName + "',data:[";
+            string seriesdata = "{ name: '" + series.SeriesName + "yAxis:" + series.yAxis + "',data:[";
 
             foreach (var item in series.SeriesData)
             {
@@ -392,10 +400,36 @@ namespace WebApplication6.Page
 
             sb.Append("]},");
         }
+
+        /// <summary>
+        /// 追加
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="yAxis"></param>
+        private void YAxisToString(StringBuilder sb,List<object> yAxis)
+        {
+            sb.Append("yAxis: [");
+
+            string yaxis = string.Empty;
+
+            foreach (var item in yAxis)
+            {
+                yaxis += "{ title:{ text:" +  "'" + item + "'}" + "}," ;
+            }
+
+            yaxis = yaxis.TrimEnd(',');
+
+            sb.Append(yaxis);
+
+            sb.Append("],");
+        }
     }
 
     public struct ChartsSeries
     {
+        public string yAxis { get; set; }//追加
+
+
         public object SeriesName { get; set; }
 
         public Dictionary<object, object> SeriesData { get; set; }

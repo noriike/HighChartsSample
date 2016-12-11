@@ -31,7 +31,7 @@
             ctx.canvas.width = window.innerWidth;
             ctx.canvas.height = window.innerHeight;
 
-            ctx.font = "12px 'ＭＳ Ｐゴシック'";
+            ctx.font = "14px 'メイリオ'";
             
             var plotLeft = Highcharts.charts[0].plotLeft;
             var plotTop = Highcharts.charts[0].plotTop;
@@ -40,7 +40,7 @@
                     console.log('Series: ' + i + ', Point: ' + j + ', Left: ' + (p.plotX + plotLeft) + ', Top: ' + (p.plotY + plotTop));
                     
                     ctx.textAlign = "center";
-                    ctx.fillText(p.y, p.plotX+plotLeft, 50);
+                    ctx.fillText(p.y, p.plotX+plotLeft, 30);
                 });
             });
         }
